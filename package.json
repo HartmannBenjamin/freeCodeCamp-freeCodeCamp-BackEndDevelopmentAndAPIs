@@ -1,6 +1,7 @@
 {
 	"name": "fcc-learn-npm-package-json",
 	"author": "benjamin",
+	"description": "Try to get the Back End certification",
 	"dependencies": {
 		"express": "^4.14.0"
 	},
