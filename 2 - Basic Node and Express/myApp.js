@@ -25,9 +25,13 @@ app.get('/:word/echo', (req, res, next) => {
  res.json({echo: req.params.word});
 });
 
-app.get('/name', (req, res) => {
+app.route('/name').get((req, res) => {
  let firstName = req.query.first;
  let lastName = req.query.last;
+ res.send({name: firstName + ' ' + lastName});
+}).post((req, res) => {
+ let firstName = req.body.first;
+ let lastName = req.body.last;
  res.send({name: firstName + ' ' + lastName});
 });
 
