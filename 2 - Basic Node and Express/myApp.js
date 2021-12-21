@@ -17,6 +17,10 @@ app.get('/now', (req, res, next) => {
  res.json({time: req.time});
 });
 
+app.get('/:word/echo', (req, res, next) => {
+ res.json({echo: req.params.word});
+});
+
 app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
