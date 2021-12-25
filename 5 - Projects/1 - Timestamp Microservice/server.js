@@ -23,19 +23,26 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:param", function (req, res) {
+app.get("/api/:param?", function (req, res) {
   let param = req.params.param;
   let dateParam = new Date();
 
-  if (/^\d{4}[./-]\d{2}[./-]\d{2}$/.test(req.params.param)) {
-    dateParam = new Date(param);
-  } else {
-    dateParam.setTime(param);
+  if (param !== undefined) {
+    if (isNaN(param)) {
+      dateParam = new Date(param);
+    } else {
+      dateParam.setTime(param);
+    }
   }
 
   let resp = {};
-  resp.unix = dateParam.getTime();
-  resp.utc = dateParam.toUTCString();
+
+  if (dateParam instanceof Date && !isNaN(dateParam.valueOf())) {
+    resp.unix = dateParam.getTime();
+    resp.utc = dateParam.toUTCString();
+  } else {
+    resp.error = "Invalid Date";
+  }
 
   res.json(resp);
 });
