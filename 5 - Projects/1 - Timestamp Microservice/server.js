@@ -25,12 +25,12 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:param", function (req, res) {
   let param = req.params.param;
-  let dateParam = null;
+  let dateParam = new Date();
 
   if (/^\d{4}[./-]\d{2}[./-]\d{2}$/.test(req.params.param)) {
     dateParam = new Date(param);
   } else {
-    dateParam = new Date(param * 1000);
+    dateParam.setTime(param);
   }
 
   let resp = {};
